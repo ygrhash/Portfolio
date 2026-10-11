@@ -1,5 +1,8 @@
 google-genai==2.25.0
 mcp==1.9.4
+# mcp 1.9.4는 pydantic 내부 함수(eval_type_backport)를 직접 import한다. pydantic 2.14에서 이 함수가 빠져
+# 버전을 고정하지 않으면 새로 설치할 때 import 에러가 난다(CI에서 실제로 발생). 동작 확인된 버전으로 고정.
+pydantic==2.13.5
 python-dotenv==1.0.1
 psycopg2-binary==2.9.10
 aiohttp==3.11.11

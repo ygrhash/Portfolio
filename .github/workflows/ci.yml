@@ -62,6 +62,10 @@ jobs:
           cache: maven
           cache-dependency-path: db-writer-consumer/pom.xml
       - working-directory: db-writer-consumer
+        # application.yml에서 기본 비밀번호를 지웠으므로(a0efee1) 테스트용 Postgres 컨테이너 비밀번호를 여기서 넘긴다.
+        # 위 services.postgres의 POSTGRES_PASSWORD와 같은 값이고, CI 안에서만 쓰고 버리는 컨테이너라 실제 비밀값이 아니다.
+        env:
+          SPRING_DATASOURCE_PASSWORD: aiops123
         run: sh ./mvnw test
 
   # gateway/mcp-server/ws-server는 테스트에서 fetch/ioredis/kafkajs/pg/AWS SDK를 전부 목킹해뒀으므로
