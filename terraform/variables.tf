@@ -13,7 +13,7 @@ variable "instance_type" {
 variable "github_repo_url" {
   description = "EC2가 clone할 소스 저장소 (Phase 11에서 만든 Dockerfile들과 k8s/ 매니페스트가 여기 들어있음)"
   type        = string
-  default     = "https://github.com/tjsal89000/2026_-Portfolio.git"
+  default     = "https://github.com/ygrhash/Portfolio.git"
 }
 
 variable "allowed_ssh_cidr" {

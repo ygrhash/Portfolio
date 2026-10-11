@@ -10,7 +10,7 @@ variable "standby_instance_id" {
 
 variable "github_repo_url" {
   type    = string
-  default = "https://github.com/tjsal89000/2026_-Portfolio.git"
+  default = "https://github.com/ygrhash/Portfolio.git"
 }
 
 variable "spot_instance_type" {

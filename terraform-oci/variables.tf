@@ -29,5 +29,5 @@ variable "allowed_ssh_cidr" {
 variable "github_repo_url" {
   description = "EC2/OCI 인스턴스가 clone할 소스 저장소 (AWS 버전과 동일)"
   type        = string
-  default     = "https://github.com/tjsal89000/2026_-Portfolio.git"
+  default     = "https://github.com/ygrhash/Portfolio.git"
 }
