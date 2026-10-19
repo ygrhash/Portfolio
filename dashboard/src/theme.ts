@@ -55,5 +55,26 @@ export function createAppTheme(mode: PaletteMode) {
     shape: {
       borderRadius: 8,
     },
+    components: {
+      // 본문·표·코드 영역 스크롤바를 기본 회색 막대 대신 얇고 반투명하게 (라이트/다크 배경에 맞춰 색만 반전).
+      // 사이드바는 자기 Paper에 더 구체적인 스타일을 따로 갖고 있어서 이 규칙에 덮이지 않는다.
+      MuiCssBaseline: {
+        styleOverrides: {
+          "*": {
+            scrollbarWidth: "thin", // Firefox
+            scrollbarColor: `${isDark ? "rgba(255,255,255,0.22)" : "rgba(35,47,62,0.22)"} transparent`,
+          },
+          "*::-webkit-scrollbar": { width: 8, height: 8 }, // Chrome · Edge · Safari
+          "*::-webkit-scrollbar-track": { background: "transparent" },
+          "*::-webkit-scrollbar-thumb": {
+            backgroundColor: isDark ? "rgba(255,255,255,0.22)" : "rgba(35,47,62,0.22)",
+            borderRadius: 4,
+          },
+          "*::-webkit-scrollbar-thumb:hover": {
+            backgroundColor: isDark ? "rgba(255,255,255,0.36)" : "rgba(35,47,62,0.36)",
+          },
+        },
+      },
+    },
   });
 }
