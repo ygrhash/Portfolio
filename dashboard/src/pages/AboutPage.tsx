@@ -1,5 +1,8 @@
-import { Box, Chip, Grid, Paper, Step, StepLabel, Stepper, Toolbar, Typography } from "@mui/material";
+import { Box, Button, Chip, Grid, Paper, Step, StepLabel, Stepper, Toolbar, Typography } from "@mui/material";
+import OpenInNewIcon from "@mui/icons-material/OpenInNewOutlined";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdfOutlined";
 import type { ViewKey } from "../viewKey";
+import { PORTFOLIO_URL, PORTFOLIO_PDF_URL } from "../portfolioLinks";
 
 // 소개 화면. 방문자가 "이 웹이 무엇을 보여주는 곳인지"를 한 번에 파악하도록, 각 메뉴의 역할과 데이터 흐름을 정리한다.
 // 수치와 설명은 실제 구현과 측정 결과에서 가져온 것만 적는다.
@@ -97,6 +100,43 @@ export default function AboutPage() {
             <Chip size="small" color="primary" variant="outlined" label="합성 데이터 (실제 결제 아님)" />
             <Chip size="small" variant="outlined" label="단일 노드 AWS 데모" />
             <Chip size="small" variant="outlined" label="공개 저장소에 전체 코드" />
+          </Box>
+          {/* 이 데모를 만든 사람이 누구인지, 실무 경력까지 이어서 볼 수 있게 포트폴리오로 연결한다 */}
+          <Box
+            sx={{
+              mt: 2,
+              pt: 2,
+              borderTop: 1,
+              borderColor: "divider",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: 1.5,
+            }}
+          >
+            <Typography variant="body2" color="text.secondary" sx={{ mr: "auto" }}>
+              만든 사람 <b>윤경록</b> · 백엔드·인프라에 강한 풀스택 개발자
+            </Typography>
+            <Button
+              size="small"
+              variant="contained"
+              href={PORTFOLIO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              endIcon={<OpenInNewIcon />}
+            >
+              포트폴리오 보기
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              href={PORTFOLIO_PDF_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              startIcon={<PictureAsPdfIcon />}
+            >
+              PDF 다운로드
+            </Button>
           </Box>
         </Paper>
 

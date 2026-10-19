@@ -15,6 +15,8 @@ import PieChartOutlinedIcon from "@mui/icons-material/PieChartOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import OpenInNewIcon from "@mui/icons-material/OpenInNewOutlined";
+import BadgeIcon from "@mui/icons-material/BadgeOutlined";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdfOutlined";
 import {
   Drawer,
   List,
@@ -30,6 +32,7 @@ import {
 import { awsColors } from "../theme";
 import type { ViewKey } from "../viewKey";
 import { API_ORIGIN } from "../apiOrigin";
+import { PORTFOLIO_URL, PORTFOLIO_PDF_URL } from "../portfolioLinks";
 
 // 이상탐지 에이전트(Python)의 제어 서버를 nginx가 이 경로로 묶어준 것.
 const ALERTS_API_BASE = `${API_ORIGIN}/alerts`;
@@ -68,6 +71,41 @@ const EXTERNAL_TOOLS = [
   { label: "n8n 워크플로우", icon: <AccountTreeIcon />, href: `${API_ORIGIN}/n8n/` },
   { label: "Prometheus", icon: <QueryStatsIcon />, href: `${API_ORIGIN}/prometheus/` },
 ];
+
+// 이 데모를 만든 사람의 포트폴리오. 운영 도구와 성격이 달라 별도 묶음으로 둔다.
+const DEVELOPER_LINKS = [
+  { label: "포트폴리오 보기", icon: <BadgeIcon />, href: PORTFOLIO_URL },
+  { label: "포트폴리오 PDF", icon: <PictureAsPdfIcon />, href: PORTFOLIO_PDF_URL },
+];
+
+// 새 탭으로 여는 외부 링크 목록 (운영 도구 · 개발자 묶음이 같은 모양을 쓴다)
+function renderExternalLinks(items: { label: string; icon: ReactElement; href: string }[]) {
+  return (
+    <List sx={{ px: 1 }}>
+      {items.map((item) => (
+        <ListItemButton
+          key={item.label}
+          component="a"
+          href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            borderRadius: 1,
+            mb: 0.5,
+            color: "#D5DBDB",
+            "&:hover": { backgroundColor: "rgba(255,255,255,0.08)" },
+          }}
+        >
+          <ListItemIcon sx={{ color: "inherit", minWidth: 36 }}>
+            {item.icon}
+          </ListItemIcon>
+          <ListItemText primary={item.label} />
+          <OpenInNewIcon sx={{ fontSize: 16, color: "#8B98A5" }} />
+        </ListItemButton>
+      ))}
+    </List>
+  );
+}
 
 interface SidebarProps {
   view: ViewKey;
@@ -155,29 +193,16 @@ export default function Sidebar({ view, onNavigate, mobileOpen, onMobileClose }:
       >
         운영 도구
       </Typography>
-      <List sx={{ px: 1 }}>
-        {EXTERNAL_TOOLS.map((item) => (
-          <ListItemButton
-            key={item.label}
-            component="a"
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{
-              borderRadius: 1,
-              mb: 0.5,
-              color: "#D5DBDB",
-              "&:hover": { backgroundColor: "rgba(255,255,255,0.08)" },
-            }}
-          >
-            <ListItemIcon sx={{ color: "inherit", minWidth: 36 }}>
-              {item.icon}
-            </ListItemIcon>
-            <ListItemText primary={item.label} />
-            <OpenInNewIcon sx={{ fontSize: 16, color: "#8B98A5" }} />
-          </ListItemButton>
-        ))}
-      </List>
+      {renderExternalLinks(EXTERNAL_TOOLS)}
+
+      <Divider sx={{ borderColor: "rgba(255,255,255,0.12)", mx: 2, my: 1 }} />
+      <Typography
+        variant="caption"
+        sx={{ px: 3, py: 0.5, color: "#8B98A5", letterSpacing: ".05em" }}
+      >
+        개발자
+      </Typography>
+      {renderExternalLinks(DEVELOPER_LINKS)}
 
       <Divider sx={{ borderColor: "rgba(255,255,255,0.12)", mx: 2, my: 1 }} />
       <Typography
