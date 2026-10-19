@@ -242,6 +242,13 @@ export default function Sidebar({ view, onNavigate, mobileOpen, onMobileClose }:
     boxSizing: "border-box" as const,
     backgroundColor: awsColors.squidInk,
     color: "#FFFFFF",
+    // 메뉴가 화면보다 길어지면 생기는 스크롤바를 어두운 메뉴 색에 맞춰 얇고 반투명하게 (기본 회색 막대 대신)
+    scrollbarWidth: "thin" as const, // Firefox
+    scrollbarColor: "rgba(255,255,255,0.18) transparent",
+    "&::-webkit-scrollbar": { width: 6 }, // Chrome · Edge · Safari
+    "&::-webkit-scrollbar-track": { background: "transparent" },
+    "&::-webkit-scrollbar-thumb": { backgroundColor: "rgba(255,255,255,0.18)", borderRadius: 3 },
+    "&::-webkit-scrollbar-thumb:hover": { backgroundColor: "rgba(255,255,255,0.32)" },
   };
 
   return (
